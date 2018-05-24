@@ -39,26 +39,26 @@ const AUTOPREFIXER_BROWSERS = [
 ];
 
 // Gulp task to minify CSS files
-gulp.task('styles-scss', function () {
-  return gulp.src('./src/sass/styles.scss')
-    // Compile SASS files
-    .pipe(sass({
-      outputStyle: 'nested',
-      precision: 10,
-      includePaths: ['.'],
-      onError: console.error.bind(console, 'Sass error:')
-    }))
-    // Auto-prefix css styles for cross browser compatibility
-    .pipe(autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
-    // Minify the file
-    .pipe(csso())
-    // Output
-    .pipe(gulp.dest('./dist/css'))
-});
+// gulp.task('styles', function () {
+//   return gulp.src('./src/sass/styles.scss')
+//     // Compile SASS files
+//     .pipe(sass({
+//       outputStyle: 'nested',
+//       precision: 10,
+//       includePaths: ['.'],
+//       onError: console.error.bind(console, 'Sass error:')
+//     }))
+//     // Auto-prefix css styles for cross browser compatibility
+//     .pipe(autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
+//     // Minify the file
+//     .pipe(csso())
+//     // Output
+//     .pipe(gulp.dest('./dist/css'))
+// });
 
 // Gulp task to minify CSS files
-gulp.task('styles-css', function () {
-  return gulp.src('./src/css/styles.css')
+gulp.task('styles', function () {
+  return gulp.src('./src/css/**/*.css')
     // Auto-prefix css styles for cross browser compatibility
     .pipe(autoprefixer({browsers: AUTOPREFIXER_BROWSERS}))
     // Minify the file
@@ -92,7 +92,7 @@ gulp.task('clean', () => del(['dist']));
 // Gulp task to minify all files
 gulp.task('default', ['clean'], function () {
   runSequence(
-    'styles-css',
+    'styles',
     'scripts',
     'pages'
   );
